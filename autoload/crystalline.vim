@@ -44,7 +44,7 @@ function! crystalline#trigger_mode_update() abort
   let l:mode = crystalline#mode_type()
   if get(g:, 'crystalline_mode', '') !=# l:mode
     let g:crystalline_mode = l:mode
-    silent doautocmd <nomodeline> User CrystallineModeUpdate
+    silent doautocmd <nomodeline> User crystallinemodeupdate
   endif
 endfunction
 
@@ -128,7 +128,6 @@ function! crystalline#buf_tabinfo(maxtabs) abort
     endif
     let l:ntabs = a:maxtabs
   endif
-
   return [l:tabs, l:ntabs, l:curtab]
 endfunction
 
@@ -293,7 +292,7 @@ function! crystalline#bufferline(...) abort
     if l:allow_mouse
       let l:tabline .= '%' . (l:i + 1) . 'T'
     endif
-    let l:tabline .= l:vtabs[l:i] . crystalline#tab_sep(l:i + 1, l:vcurtab, l:vntabs, l:show_mode)
+    let l:tabline .= l:vtabs[l:i] . '%#CrystallineTab#│' . crystalline#tab_sep(l:i + 1, l:vcurtab, l:vntabs, l:show_mode)
   endfor
   if l:allow_mouse
     let l:tabline .= '%T'
@@ -558,3 +557,4 @@ endfunction
 " }}}
 
 " vim:set et sw=2 ts=2 fdm=marker:
+"
